@@ -2,8 +2,8 @@
   "configurations": [
     {
       "name": "x64-Release",
-      "generator": "Ninja",
-      "configurationType": "RelWithDebInfo",
+      "generator": "Visual Studio 17 2022 Win64",
+      "configurationType": "MinSizeRel",
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",

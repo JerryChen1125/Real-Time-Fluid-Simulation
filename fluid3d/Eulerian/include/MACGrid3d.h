@@ -11,6 +11,8 @@
 #include <glm/glm.hpp>
 #include "GridData3d.h"
 #include <Logger.h>
+#include <cuda_runtime.h>
+#include <cuda_gl_interop.h>
 
 namespace FluidSimulation
 {
@@ -84,6 +86,9 @@ namespace FluidSimulation
             float cellSize;             // 网格单元大小
             int dim[3];                 // 网格维度 [宽, 高, 深]
 
+            void InitCUDA();
+            void CleanupCUDA();
+
         public:
             Glb::GridData3dX mU;        // X方向速度分量
             Glb::GridData3dY mV;        // Y方向速度分量
@@ -91,6 +96,28 @@ namespace FluidSimulation
             Glb::CubicGridData3d mD;    // 密度场
             Glb::CubicGridData3d mT;    // 温度场
             Glb::GridData3d mSolid;     // 固体标记（1表示固体，0表示流体）
+
+            // 密度场 (用于渲染) - OpenGL 纹理
+            unsigned int densityTexID = 0;
+            cudaGraphicsResource* cuda_density_res = nullptr; // CUDA 映射句柄
+            // 密度场 (用于计算的临时副本) - CUDA Array
+            // 为了实现 Ping-Pong 或读写分离，Advection 需要从旧状态读，写入新状态
+            cudaArray* d_densityArrayTemp = nullptr;
+            cudaTextureObject_t densityTexObjRead = 0; // 用于读取的纹理对象 (支持三线性插值)
+
+            // 温度场
+            unsigned int temperatureTexID = 0;
+            cudaGraphicsResource* cuda_temperature_res = nullptr;
+            // 温度场 (用于计算的临时副本)
+            cudaArray* d_temperatureArrayTemp = nullptr;
+            cudaTextureObject_t temperatureTexObjRead = 0;
+
+            float3* d_velocity = nullptr; // 速度场 (u, v, w) - CUDA 显存
+            float3* d_velocity_backup = nullptr; // 用于半步反射求解器
+            float* d_pressure = nullptr;      // 压力场 P
+            float* d_pressure_temp = nullptr; // 用于 Jacobi 迭代的 Ping-Pong 缓冲
+            float* d_divergence = nullptr;    // 速度散度 div(u)
+            dim3 gpuDim;   // 网格维度的 CUDA 类型
         };
 
 /**

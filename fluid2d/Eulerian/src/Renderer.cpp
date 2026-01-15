@@ -24,9 +24,13 @@ namespace FluidSimulation
 		{
 			// 加载着色器
 			extern std::string shaderPath;
+			//std::cout << shaderPath << std::endl;
 			std::string vertShaderPath = shaderPath + "/DrawSmokeTexture2d.vert";
+			vertShaderPath = "F:/2025fall/CG/my_project/final_project/NKU_CG_FluidSim-main/code/resources/shaders/DrawSmokeTexture2d.vert";
 			std::string fragShaderPath = shaderPath + "/DrawSmokeTexture2d.frag";
+			fragShaderPath = "F:/2025fall/CG/my_project/final_project/NKU_CG_FluidSim-main/code/resources/shaders/DrawSmokeTexture3d.frag";
 			shader = new Glb::Shader();
+			//std::cout << vertShaderPath << std::endl;
 			shader->buildFromFile(vertShaderPath, fragShaderPath);
 
 			// 创建VAO、VBO和EBO

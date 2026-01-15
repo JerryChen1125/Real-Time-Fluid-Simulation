@@ -9,6 +9,8 @@
 
 #include "MACGrid3d.h"
 #include "Configure.h"
+#include <cuda_runtime.h>
+#include <cuda_gl_interop.h>
 
 namespace FluidSimulation
 {
@@ -26,6 +28,8 @@ namespace FluidSimulation
 			 * @param grid MAC网格引用
 			 */
 			Solver(MACGrid3d &grid);
+
+			void solveOneStep(cudaSurfaceObject_t densitySurf, cudaArray* densityArrayGL, cudaSurfaceObject_t tempSurf, cudaArray* tempArrayGL, float dt);
 
 			/**
 			 * 执行一步仿真计算

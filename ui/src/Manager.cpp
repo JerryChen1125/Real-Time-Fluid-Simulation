@@ -24,9 +24,7 @@ namespace FluidSimulation
 
         // 创建并注册可选的仿真方法组件
         int id = 0;
-        methodComponents.push_back(new Lagrangian2d::Lagrangian2dComponent("Lagrangian 2d", id++));
         methodComponents.push_back(new Eulerian2d::Eulerian2dComponent("Eulerian 2d", id++));
-        methodComponents.push_back(new Lagrangian3d::Lagrangian3dComponent("Lagrangian 3d", id++));
         methodComponents.push_back(new Eulerian3d::Eulerian3dComponent("Eulerian 3d", id++));
         // TODO(optional): 添加更多仿真方法
     }

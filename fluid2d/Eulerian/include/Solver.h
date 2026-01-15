@@ -7,33 +7,36 @@
 #ifndef __EULERIAN_2D_SOLVER_H__
 #define __EULERIAN_2D_SOLVER_H__
 
-#include "Eulerian/include/MACGrid2d.h"
+#include "MACGrid2d.h"
 #include "Global.h"
 
-namespace FluidSimulation{
-	namespace Eulerian2d {
-		/**
-		 * 求解器类
-		 * 实现基于MAC网格的2D欧拉流体仿真算法
-		 */
-		class Solver {
-		public:
-			/**
-			 * 构造函数
-			 * @param grid MAC网格引用
-			 */
-			Solver(MACGrid2d& grid);
+namespace FluidSimulation {
+    namespace Eulerian2d {
+        class Solver {
+        public:
+            Solver(MACGrid2d& grid);
 
-			/**
-			 * 执行一步仿真计算
-			 * 包含速度更新、压力求解等步骤
-			 */
-			void solve();
+            void solve();
 
-		protected:
-			MACGrid2d& mGrid;  // MAC网格引用
-		};
-	}
+        protected:
+
+            void vel_step(float dt);
+            void dens_step(float dt);
+
+            // 1. advection
+            // 2. compute external forces
+            // 3. projection
+            void advect(float dt);
+
+            void computeforces(float dt);
+
+            void project(float dt);
+
+            void reflectVelocity();
+
+            MACGrid2d& mGrid;
+        };
+    }
 }
 
 #endif // !__EULER_SOLVER_H__

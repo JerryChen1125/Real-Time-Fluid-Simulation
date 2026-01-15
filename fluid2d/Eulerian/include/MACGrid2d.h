@@ -92,10 +92,12 @@ namespace FluidSimulation
             int dim[2];                 // 网格维度 [宽, 高]
 
             Glb::GridData2dX mU;        // X方向速度分量
+            Glb::GridData2dX mU_half;
             Glb::GridData2dY mV;        // Y方向速度分量
+            Glb::GridData2dY mV_half;
             Glb::CubicGridData2d mD;    // 密度场
             Glb::CubicGridData2d mT;    // 温度场
-
+            Glb::CubicGridData2d mP;    // pressure
             Glb::GridData2d mSolid;     // 固体标记（1表示固体，0表示流体）
         };
 

@@ -1,9 +1,13 @@
-﻿
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 
 project(FluidSimulationSystem VERSION 1.0
-		DESCRIPTION "A simple system for fluid simulation"
-		LANGUAGES C CXX)
+        DESCRIPTION "A simple system for fluid simulation"
+        LANGUAGES C CXX CUDA)
+
+# set CUDA options
+set(CMAKE_CUDA_STANDARD 14)
+set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+set(CMAKE_CUDA_ARCHITECTURES AUTO)
 
 # where to find the .h
 include_directories(
@@ -14,11 +18,7 @@ include_directories(
 	"./third_party/glm"
 	"./third_party/stb"
 	"./common/include"
-	"./fluid2d/"
-	"./fluid2d/Lagrangian/include"
 	"./fluid2d/Eulerian/include"
-	"./fluid3d/"
-	"./fluid3d/Lagrangian/include"
 	"./fluid3d/Eulerian/include"
 	"./ui/include"
 	"."
@@ -33,11 +33,9 @@ add_subdirectory("./third_party/glm")
 add_subdirectory("./common")
 
 # 2d simulation scheme
-add_subdirectory("./fluid2d/Lagrangian")
 add_subdirectory("./fluid2d/Eulerian")
 
 # 3d simulation scheme
-add_subdirectory("./fluid3d/Lagrangian")
 add_subdirectory("./fluid3d/Eulerian")
 
 # ui

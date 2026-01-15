@@ -18,9 +18,7 @@
 #include "ProjectView.h"
 
 // 仿真方法组件头文件
-#include "Lagrangian2dComponent.h"
 #include "Eulerian2dComponent.h"
-#include "Lagrangian3dComponent.h"
 #include "Eulerian3dComponent.h"
 
 #include <vector>

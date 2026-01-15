@@ -68,7 +68,6 @@ namespace Eulerian2dPara
     extern int drawModel;
     extern int gridNum;
 
-
     extern float airDensity;
     extern float ambientTemp;
     extern float boussinesqAlpha;
@@ -99,22 +98,14 @@ namespace Eulerian3dPara
     extern bool addSolid;
 
     extern float contrast;
-    extern bool oneSheet;
-    extern float distanceX;
-    extern float distanceY;
-    extern float distanceZ;
-    extern bool xySheetsON;
-    extern bool yzSheetsON;
-    extern bool xzSheetsON;
-    extern int xySheetsNum;
-    extern int yzSheetsNum;
-    extern int xzSheetsNum;
     extern int drawModel;
     extern int gridNumX;
     extern int gridNumY;
     extern int gridNumZ;
 
     extern float dt;
+    extern bool useBFECC;
+    extern bool useReflection;
 
     extern float airDensity;
     extern float ambientTemp;
@@ -122,85 +113,6 @@ namespace Eulerian3dPara
     extern float boussinesqBeta;
     extern float vorticityConst;
 
-}
-
-/**
- * 2D 拉格朗日流体（粒子法）参数命名空间
- * 存放 2D 粒子流体模拟相关的配置参数
- */
-namespace Lagrangian2dPara
-{
-    /**
-     * 流体块数据结构
-     * 描述流体初始包围盒、初始速度以及粒子间距
-     */
-    struct FluidBlock {
-        glm::vec2 lowerCorner = glm::vec2(0.0f, 0.0f);
-        glm::vec2 upperCorner = glm::vec2(0.0f, 0.0f);
-        glm::vec2 initVel = glm::vec2(0.0f, 0.0f);
-        float particleSpace = 0.02f;
-    };
-
-    extern float scale;
-    extern std::vector<FluidBlock> fluidBlocks;
-
-    extern float dt;
-    extern int substep;
-    extern float maxVelocity;
-    extern float velocityAttenuation;
-    extern float eps;
-
-    extern float supportRadius;
-    extern float particleRadius;
-    extern float particleDiameter;
-    extern float gravityX;
-    extern float gravityY;
-    extern float density;
-    extern float stiffness;
-    extern float exponent;
-    extern float viscosity;
-    extern bool enableFountain2d;
-}
-
-/**
- * 3D 拉格朗日流体（粒子法）参数命名空间
- * 存放 3D 粒子流体模拟相关的配置参数
- */
-namespace Lagrangian3dPara
-{
-    /**
-     * 流体块数据结构
-     * 描述流体初始包围盒、初始速度以及粒子间距
-     */
-    struct FluidBlock {
-        glm::vec3 lowerCorner = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 upperCorner = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 initVel = glm::vec3(0.0f, 0.0f, 0.0f);
-        float particleSpace = 0.02f;
-    };
-
-    extern float scale;
-    extern std::vector<FluidBlock> fluidBlocks;
-
-
-    extern float dt;
-    extern int substep;
-    extern float maxVelocity;
-    extern float velocityAttenuation;
-    extern float eps;
-
-    extern float supportRadius;
-    extern float particleRadius;
-    extern float particleDiameter;
-
-    extern float gravityX;
-    extern float gravityY;
-    extern float gravityZ;
-
-    extern float density;
-    extern float stiffness;
-    extern float exponent;
-    extern float viscosity;
 }
 
 // 资源路径
